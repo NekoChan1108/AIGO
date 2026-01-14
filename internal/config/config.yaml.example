@@ -1,0 +1,97 @@
+App:
+  Name: AIGO
+  Version: 0.1.0
+  Port: 9999
+
+# mysql 数据库
+MySql:
+  Host: 127.0.0.1
+  Port: 3306
+  User: root
+  Password: 
+  DataBase: aigo
+  # 最大连接数
+  MaxOpenConns: 50
+  # 最大空闲数
+  MaxIdleConns: 10
+  # 最大连接空闲时间 mins
+  ConnMaxIdleTime: 30
+  # 最大连接存活时间 mins
+  ConnMaxLifeTime: 60 
+
+# redis 缓存
+Redis:
+  Host: 127.0.0.1
+  Port: 6379
+  DataBase: 0
+  User:
+  Password:
+  # 连接超时 seconds
+  TimeOut: 5        
+  PoolSize: 100               
+  MinIdleConns: 5     
+  MaxIdleConns: 20 
+  MaxActiveConns: 50 
+  # 连接空闲超时 mins         
+  ConnMaxIdleTime: 30  
+  # 最大连接存活时间 mins    
+  ConnMaxLifetime: 60        
+  
+
+# kafka 消息队列
+Kafka:
+ Brokers:
+   - 127.0.0.1:9092
+
+# mongodb 消费消息 记录对话历史
+MongoDB:
+  # 集群地址 
+  Hosts: 
+  - 127.0.0.1:27017
+  User:
+  Password:
+  DataBase: aigo
+  Collection: message
+  # 连接池相关参数
+  MaxPoolSize: 50         
+  MinPoolSize: 5 
+  # 最大连接空闲超时 mins      
+  MaxConnIdleTime: 30 
+  # 最大连接数  
+  MaxConnecting: 5
+  # 连接超时 seconds
+  ConnectTimeout: 5    
+
+
+# 模型
+Model:
+  # 火山引擎密钥
+  ApiKey: 
+  # 文本模型
+  TextModel: 
+  # 向量模型
+  EmbeddingModel: 
+  # 语音模型
+  VoiceModel: 
+  # 视觉模型
+  VisionModel: 
+
+# 向量数据库 用于RAG
+Milvus:
+  Host: 127.0.0.1
+  Port: 19530
+  # 超时时间 seconds
+  Timeout: 5
+  DataBase: aigo
+  User: admin
+  Password: admin
+
+# Email 邮箱配置
+Email:
+  # 发送者邮箱
+  Sender:
+  # smtp 服务器 
+  Host: 
+  Port: 
+  # smtp 服务授权码
+  AuthentiCation: 
