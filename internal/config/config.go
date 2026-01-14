@@ -88,7 +88,7 @@ type milvusConfig struct {
 // emailConfig 邮件配置
 type emailConfig struct {
 	Host           string `mapstructure:"Host"`           // 邮箱smtp地址
-	Port           string `mapstructure:"Port"`           // 邮箱smtp端口
+	Port           int    `mapstructure:"Port"`           // 邮箱smtp端口
 	Sender         string `mapstructure:"Sender"`         // 发送者(发送邮件的邮箱)
 	Authentication string `mapstructure:"AuthentiCation"` // 邮箱密码
 }
