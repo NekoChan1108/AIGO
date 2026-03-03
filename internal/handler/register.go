@@ -11,6 +11,7 @@ type UserRegisterRequest struct {
 	Username string `json:"username"`
 	Email    string `json:"email"`
 	Password string `json:"password"`
+	VerificationCode string `json:"verification_code"`
 }
 
 func UserRegisterHandler(ctx *gin.Context) {
@@ -25,7 +26,7 @@ func UserRegisterHandler(ctx *gin.Context) {
 		return
 	}
 	// 业务逻辑
-	if err := logic.Register(req.Username, req.Email, req.Password); err != nil {
+	if err := logic.Register(ctx, req.Username, req.Email, req.Password, req.VerificationCode); err != nil {
 		ctx.JSON(http.StatusInternalServerError, &Response{
 			Code: http.StatusInternalServerError,
 			Msg:  err.Error(),
