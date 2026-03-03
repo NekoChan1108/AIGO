@@ -1,0 +1,125 @@
+App:
+  Name: AIGO
+  Version: 0.1.0
+  Port: :9999
+  Path: /api/v1
+  # 最大文件大小 10MB
+  MaxFileSize: 10
+
+# mysql 数据库
+MySql:
+  Host: 127.0.0.1
+  Port: 3306
+  User: root
+  Password: 你自己的数据库密码
+  DataBase: aigo
+  # 最大连接数
+  MaxOpenConns: 50
+  # 最大空闲数
+  MaxIdleConns: 10
+  # 最大连接空闲时间 mins
+  ConnMaxIdleTime: 30
+  # 最大连接存活时间 mins
+  ConnMaxLifeTime: 60 
+
+# redis 缓存
+Redis:
+  Host: 127.0.0.1
+  Port: 6379
+  DataBase: 0
+  User:
+  Password:
+  # 连接超时 seconds
+  TimeOut: 5        
+  PoolSize: 100               
+  MinIdleConns: 5     
+  MaxIdleConns: 20 
+  MaxActiveConns: 50 
+  # 连接空闲超时 mins         
+  ConnMaxIdleTime: 30  
+  # 最大连接存活时间 mins    
+  ConnMaxLifetime: 60        
+  
+
+# kafka 消息队列
+Kafka:
+ Brokers:
+   - 127.0.0.1:9092
+
+# mongodb 消费消息 异步消费记录对话历史
+MongoDB:
+  # 集群地址 
+  Hosts: 
+  - 127.0.0.1:27017
+  User:
+  Password:
+  DataBase: aigo
+  Collection: message
+  # 连接池相关参数
+  MaxPoolSize: 50         
+  MinPoolSize: 5 
+  # 最大连接空闲超时 mins      
+  MaxConnIdleTime: 30 
+  # 最大连接数  
+  MaxConnecting: 5
+  # 连接超时 seconds
+  ConnectTimeout: 5    
+
+
+# 模型 如果遇到模型调用失败请修改模型ID
+Model:
+  # 火山引擎密钥
+  ApiKey: 你自己的火山引擎密钥
+  # 文本模型
+  TextModel: doubao-seed-1-6-lite-251015
+  # 向量模型 doubao-embedding-text-240715 向量维度 2560 维,支持 512, 1024, 2048 降维使用
+  EmbeddingModel: doubao-embedding-text-240715
+  # 语音模型 后续考虑
+  VoiceModel: xunfei
+  # 视觉模型 后续考虑
+  VisionModel: kimi
+
+# 向量数据库 用于RAG
+Milvus:
+  Host: 49.235.73.231
+  Port: 19530
+  # 超时时间 seconds
+  Timeout: 5
+  DataBase: aigo
+  Collection: aigo_vector
+  User: admin
+  Password: admin
+  # 向量维度 需要和EmbeddingModel模型一致
+  Dimension: 2560
+  # RAG 召回时选择最接近的答案数
+  TOPK: 10
+
+# Email 邮箱配置
+Email:
+  Sender: XXXXXX@XXX.com
+  Host: 对应邮箱 smtp 服务器
+  Port: 465
+  AuthentiCation: 申请后的权限码
+  # 邮箱验证码有效时间 mins
+  Expiration: 5
+
+# Jwt  双token
+Jwt:
+  # 密钥
+  Secret: gE3.jC1@sX3:cI1!gL1@wO7/jG0`dU6@
+  # 访问令牌有效期 seconds
+  AccessExpiration: 86400
+  # 刷新令牌有效期 seconds 
+  RefreshExpiration: 604800
+  # 签名 
+  Issuer: AIGO
+  # 主体
+  Subject: AIGO-TOKEN
+
+# 监控三件套后续添加
+
+# Jaeger
+Jaeger:
+
+# Prometheus
+Prometheus:
