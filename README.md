@@ -39,8 +39,8 @@ AIGO 是一个基于 Eino 框架构建的高性能、可扩展的开源智能 Ag
     <td width="50%"><img src="assets/register.png" alt="注册界面"></td>
   </tr>
   <tr>
-    <td align="center"><strong>聊天界面 (浅色)</strong></td>
-    <td align="center"><strong>聊天界面 (深色)</strong></td>
+    <td align="center"><strong>主页 (浅色)</strong></td>
+    <td align="center"><strong>主页 (深色)</strong></td>
   </tr>
   <tr>
     <td><img src="assets/light.png" alt="主页 (浅色)"></td>
