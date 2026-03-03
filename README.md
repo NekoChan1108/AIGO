@@ -1,4 +1,4 @@
-<p align="center">
+<p align="center"> 
   <a href="#">
     <img src="ui/public/logo.svg" alt="AIGO Logo" width="120">
   </a>
@@ -145,7 +145,7 @@ AIGO 是一个基于 Eino 框架构建的高性能、可扩展的开源智能 Ag
 | 🚧 | 低 | 国际化 | 完善 i18n 多语言支持，优化现有文字描述。 |
 | 🚧 | 低 | 测试 | 上线前的最终测试。 |
 | 🚀 | 远期 | 高级功能 | 支持用户自定义模型 API Key，或接入本地 Ollama 模型。 |
-| 🚀 | 远期 | 高级功能 | 实现基于 MCP 的多 Agent 编排、图编排、多模型对话、ReAct 等高级功能。 |
+| 🚀 | 远期 | 高级功能 | 实现基于 MCP 的多 Agent 编排、图编排、多模型对话、ReAct 等高级功能。 | 
 
 ## 🤝 如何贡献
 
