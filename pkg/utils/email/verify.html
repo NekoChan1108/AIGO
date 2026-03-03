@@ -5,92 +5,109 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>邮箱验证</title>
   <style>
-
-:root{
-  --primary-1:#667eea;
-  --primary-2:#764ba2;
-  --bg-1:#f5f7fa;
-  --bg-2:#e4edf5;
-  --text:#222;
-  --muted:#666;
-  --border:#eaeef5;
-  --radius:16px;
-  --maxw:640px;
-  --shadow:0 12px 34px rgba(0,0,0,.12), 0 4px 10px rgba(0,0,0,.06);
-}
-
+/* 邮件客户端兼容性优化 */
 *{margin:0;padding:0;box-sizing:border-box;}
 body{
   font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Tahoma,Geneva,Verdana,sans-serif;
-  background: linear-gradient(135deg, var(--bg-1) 0%, var(--bg-2) 100%);
-  color:var(--text);
+  background-color: #f5f7fa;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+  color: #222222;
   line-height:1.65;
   padding:24px 0;
 }
 
 .container{
-  width: min(92vw, var(--maxw));
+  width: 92%;
+  max-width: 640px;
   margin: 0 auto;
-  background:#fff;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
+  background:#ffffff;
+  border-radius: 16px;
+  box-shadow: 0 12px 34px rgba(0,0,0,.12);
   overflow:hidden;
-  border:1px solid var(--border);
+  border:1px solid #eaeef5;
 }
 
 .header{
-  background: linear-gradient(135deg, var(--primary-1) 0%, var(--primary-2) 100%);
-  color:#fff;
+  background-color: #667eea;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color:#ffffff;
   text-align:center;
   padding:46px 28px;
-  position:relative;
-}
-.header::after{
-  content:"";
-  position:absolute;
-  inset:auto 0 -12px 0;
-  height:24px;
-  background: linear-gradient(to bottom, rgba(255,255,255,.25) 0%, transparent 100%);
-  opacity:.35;
 }
 .header h1{
-  font-size: clamp(26px, 5vw, 36px);
+  font-size: 28px;
   font-weight:800;
   letter-spacing:.6px;
+  margin: 0;
 }
 .header p{
-  margin-top:10px;
-  font-size: clamp(14px, 2.5vw, 16px);
+  margin: 10px 0 0;
+  font-size: 16px;
   opacity:.92;
 }
 
 .content{
-  padding:46px 36px;
+  padding:40px 20px;
   text-align:center;
 }
 
 .lead{
-  font-size: 17px;
-  color:#444;
+  font-size: 18px;
+  color:#333333;
   margin-bottom: 16px;
 }
 .text{
-  font-size: 15.5px;
-  color: var(--muted);
+  font-size: 15px;
+  color: #666666;
   margin: 10px 0;
 }
 
+/* 验证码样式优化：鲜艳红色，确保不被糊住 */
+.code-container {
+  margin: 30px 0;
+  text-align: center;
+}
+.code{
+  display:inline-block;
+  background-color: #fff5f5; /* 极浅红色背景 */
+  color: #e53e3e !important; /* 鲜艳的深红色文字 */
+  font-weight: 900;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 42px; /* 更大的字号 */
+  letter-spacing: 8px;
+  padding: 15px 30px;
+  border-radius: 12px;
+  border: 2px dashed #feb2b2; /* 红色虚线边框增强存在感 */
+  text-transform: uppercase;
+  box-shadow: 0 4px 12px rgba(229, 62, 62, 0.08);
+}
+
+.expire{
+  color:#e53e3e;
+  font-weight:800;
+}
+.note{
+  background:#fffaf0;
+  border-left:4px solid #f6ad55;
+  padding:12px 18px;
+  border-radius: 0 10px 10px 0;
+  margin: 20px auto;
+  color:#c05621;
+  font-size: 14px;
+  text-align:center;
+}
+
 .footer{
-  background: linear-gradient(to top, #f8f9fa 0%, #ffffff 100%);
+  background-color: #f8f9fa;
   padding: 26px 30px;
   text-align:center;
-  color:#777;
+  color:#777777;
   font-size:14px;
-  border-top:1px solid #eee;
+  border-top:1px solid #eeeeee;
 }
 .brand{
   font-weight:800;
-  color:var(--primary-1);
+  color:#667eea;
   letter-spacing:.6px;
   font-size:18px;
   margin-bottom:6px;
@@ -101,49 +118,10 @@ body{
   color:#8a8a8a;
 }
 
-a{color:var(--primary-1);text-decoration:none;}
-a:hover{text-decoration:underline;}
-
-/* Responsive */
 @media (max-width: 520px){
-  body{padding:10px 0;}
-  .container{width:100%;margin:0;border-radius:0;}
-  .header{padding:34px 18px;}
-  .content{padding:30px 16px;}
-  .footer{padding:22px 16px;}
+  .header h1{ font-size: 24px; }
+  .code { font-size: 32px !important; letter-spacing: 4px !important; padding: 10px 20px !important; }
 }
-
-
-.code{
-  display:inline-block;
-  background: linear-gradient(135deg, var(--primary-1) 0%, var(--primary-2) 100%);
-  color:#fff;
-  font-weight:900;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Courier New", monospace;
-  font-size: clamp(24px, 6vw, 36px);
-  letter-spacing: clamp(3px, 1.4vw, 6px);
-  padding: 18px 26px;
-  border-radius: 14px;
-  margin: 22px 0 18px;
-  box-shadow: 0 10px 26px rgba(102,126,234,.35), 0 5px 12px rgba(102,126,234,.22);
-  text-transform: uppercase;
-  max-width: 100%;
-}
-.expire{
-  color:#e74c3c;
-  font-weight:800;
-}
-.note{
-  background:#fef9e7;
-  border-left:4px solid #f39c12;
-  padding:12px 18px;
-  border-radius: 0 10px 10px 0;
-  margin: 18px auto;
-  color:#d35400;
-  font-size: 13.5px;
-  text-align:center;
-}
-
   </style>
 </head>
 <body>
@@ -158,11 +136,13 @@ a:hover{text-decoration:underline;}
       <p class="text">感谢您使用我们的服务。</p>
       <p class="text">您的验证码为：</p>
 
-      <div class="code">{{.Code}}</div>
+      <div class="code-container">
+        <div class="code">{{.Code}}</div>
+      </div>
 
       <p class="text">此验证码将在 <span class="expire">{{.ExpireTime}}分钟</span> 后失效，请尽快使用。</p>
 
-      <div class="note" >如果不是您本人操作，请忽略此邮件并及时检查账户安全。</div>
+      <div class="note">如果不是您本人操作，请忽略此邮件并及时检查账户安全。</div>
 
       <p class="text">请勿向任何人透露您的验证码，以保障账户安全。</p>
     </div>
