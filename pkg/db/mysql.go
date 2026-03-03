@@ -2,7 +2,6 @@ package db
 
 import (
 	"AIGO/internal/config"
-	"AIGO/internal/model"
 	"AIGO/pkg/log"
 	"fmt"
 	"time"
@@ -52,8 +51,5 @@ func init() {
 			sqlDB.SetConnMaxIdleTime(time.Duration(config.Cfg.MysqlCfg.ConnMaxIdleTime) * time.Minute) // 设置连接最大空闲时间
 		}
 		MysqlDB = db
-		if err := db.AutoMigrate(&model.User{}); err != nil {
-			log.Fatalf("Failed to auto migrate mysql: %v", err)
-		}
 	}
 }
