@@ -191,9 +191,31 @@ func (i *RagIndexer) processSegment(ctx context.Context, fileId, content string,
 		chunk.MetaData["chunk_idx"] = chunkIdx
 		chunk.MetaData["segment_idx"] = idx
 	}
-	// 索引文档
-	if _, err = i.indexer.Store(ctx, chunks); err != nil {
-		return fmt.Errorf("failed to index documents: %v", err)
+	// 索引文档 - 分批处理，Ark Embedding 限制单次请求最多 256 个分片
+	const batchSize = 250 // 留一点余量
+	var wg sync.WaitGroup
+	errChan := make(chan error, (len(chunks)/batchSize)+1)
+
+	for j := 0; j < len(chunks); j += batchSize {
+		end := min(j+batchSize, len(chunks))
+		wg.Add(1)
+
+		// 开启协程并发发送 Embedding 请求
+		go func(batch []*schema.Document, startIdx int) {
+			defer wg.Done()
+			ids, err := i.indexer.Store(ctx, batch)
+			if err != nil {
+				errChan <- err
+				return
+			}
+			log.Infof("Indexed %d chunks (batch starting at %d)", len(ids), startIdx)
+		}(chunks[j:end], j)
+	}
+
+	wg.Wait()
+	close(errChan)
+	if err := <-errChan; err != nil {
+		return err
 	}
 	return nil
 }
