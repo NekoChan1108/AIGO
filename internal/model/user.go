@@ -1,6 +1,8 @@
 package model
 
 import (
+	"AIGO/pkg/db"
+	"AIGO/pkg/log"
 	"time"
 
 	"gorm.io/gorm"
@@ -19,7 +21,14 @@ type User struct {
 	Password string `gorm:"not null;size:255" json:"-"` // json:"-" 不参与序列化不返回给前端 255为了存加密后的密码
 }
 
-// 指定表明
+// 指定表名字
 func (User) TableName() string {
 	return "aigo_user"
+}
+
+func init() {
+	// 创建表
+	if err := db.MysqlDB.AutoMigrate(&User{}); err != nil {
+		log.Error(err)
+	}
 }
