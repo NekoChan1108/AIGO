@@ -14,7 +14,7 @@ type UserLoginRequest struct {
 }
 
 func UserLoginHandler(ctx *gin.Context) {
-	req := &UserRegisterRequest{}
+	req := &UserLoginRequest{}
 	// 前端参数绑定
 	if err := ctx.ShouldBindJSON(req); err != nil {
 		ctx.JSON(http.StatusBadRequest, &Response{
@@ -25,7 +25,7 @@ func UserLoginHandler(ctx *gin.Context) {
 		return
 	}
 	// 业务逻辑
-	loginUser, err := logic.Login(req.Username, req.Email, req.Password)
+	loginUser, err := logic.Login(ctx, req.Username, req.Email, req.Password)
 	if err != nil || loginUser == nil {
 		ctx.JSON(http.StatusInternalServerError, &Response{
 			Code: http.StatusInternalServerError,
