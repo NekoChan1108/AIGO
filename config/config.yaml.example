@@ -81,7 +81,7 @@ Model:
 
 # 向量数据库 用于RAG
 Milvus:
-  Host: 49.235.73.231
+  Host: 127.0.0.1
   Port: 19530
   # 超时时间 seconds
   Timeout: 5
