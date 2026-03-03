@@ -8,7 +8,7 @@ import (
 	"gorm.io/gorm"
 )
 
-// User 用户
+// User 用户 
 type User struct {
 	ID          uint           `gorm:"primaryKey" json:"-"`
 	CreatedAt   time.Time      `json:"created_at"`
