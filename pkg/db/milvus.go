@@ -7,20 +7,20 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/milvus-io/milvus-sdk-go/v2/client"
+	"github.com/milvus-io/milvus/client/v2/milvusclient"
 )
 
 // MilvusDB milvus数据库连接
-var MilvusDB client.Client
+var MilvusDB *milvusclient.Client
 
 // getMilvusConn 获取milvus连接
-func getMilvusConn() (client.Client, error) {
+func getMilvusConn() (*milvusclient.Client, error) {
 	ctx := context.Background()
 	if config.Cfg.MilvusCfg == nil {
 		log.Fatal("Milvus config is nil")
 	}
 	addr := fmt.Sprintf("%s:%s", config.Cfg.MilvusCfg.Host, config.Cfg.MilvusCfg.Port)
-	cfg := client.Config{
+	cfg := &milvusclient.ClientConfig{
 		Address: addr,
 	}
 	// 校验并设置用户名和密码
@@ -36,9 +36,9 @@ func getMilvusConn() (client.Client, error) {
 	if config.Cfg.MilvusCfg.Timeout > 0 {
 		timeCtx, cancel := context.WithTimeout(ctx, time.Duration(config.Cfg.MilvusCfg.Timeout)*time.Second)
 		defer cancel()
-		return client.NewClient(timeCtx, cfg)
+		return milvusclient.New(timeCtx, cfg)
 	}
-	return client.NewClient(ctx, cfg)
+	return milvusclient.New(ctx, cfg)
 }
 
 func init() {
