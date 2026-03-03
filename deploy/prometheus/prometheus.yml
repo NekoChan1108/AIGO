@@ -1,0 +1,17 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+scrape_configs:
+  # prometheus 本身的指标采集
+  - job_name: 'prometheus'
+    static_configs:
+    # 换成本机的 prometheus listen 端口
+     - targets: ["localhost:9090"]
+  # 模型消耗以及运行指标采集
+  - job_name: 'LLM'
+    metric_path: /metrics
+    static_configs:
+    # 告诉 prometheus 去 9999 端口的 /metrics 路径采集指标 
+    #由于 docker 容器内无法直接访问宿主机的 9999 端口 所以需要使用 host.docker.internal
+    - targets : ['host.docker.internal:9999']
+    
