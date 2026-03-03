@@ -9,7 +9,7 @@ import (
 	"go.mongodb.org/mongo-driver/v2/mongo/options"
 )
 
-var MongoDB *mongo.Client
+var MongoDB *mongo.Collection
 
 // getMongoDBConn 获取MongoDB连接
 func getMongoDBConn() (*mongo.Client, error) {
@@ -56,5 +56,5 @@ func init() {
 	if err != nil {
 		log.Fatalf("Failed to connect to mongodb: %v", err)
 	}
-	MongoDB = client
+	MongoDB = client.Database(config.Cfg.MongoCfg.DataBase).Collection(config.Cfg.MongoCfg.Collection)
 }
