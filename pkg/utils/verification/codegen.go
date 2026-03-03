@@ -4,7 +4,7 @@ import (
 	"math/rand"
 )
 
-const (
+const ( 
 	// 验证码长度
 	codeLength = 6
 	// 随机种子
