@@ -97,8 +97,8 @@ Milvus:
 # Email 邮箱配置
 Email:
   Sender: XXXXXX@XXX.com
-  Host: 对应邮箱 smtp 服务器
-  Port: 465
+  Host: 对应邮箱 smtp 服务器地址
+  Port: 对应邮箱 smtp 端口
   AuthentiCation: 申请后的权限码
   # 邮箱验证码有效时间 mins
   Expiration: 5
