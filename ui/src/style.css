@@ -1,0 +1,79 @@
+@import "tailwindcss";
+
+/* 强制开启 Class 模式的暗黑支持 */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* 自定义颜色 */
+  --color-primary-50: #f5f3ff;
+  --color-primary-100: #ede9fe;
+  --color-primary-200: #ddd6fe;
+  --color-primary-300: #c4b5fd;
+  --color-primary-400: #a78bfa;
+  --color-primary-500: #8b5cf6;
+  --color-primary-600: #7c3aed;
+  --color-primary-700: #6d28d9;
+  --color-primary-800: #5b21b6;
+  --color-primary-900: #4c1d95;
+
+  /* 自定义动画关键帧 */
+  --animate-cursor-blink: cursor-blink 1s step-start infinite;
+  --animate-scroll: scroll 40s linear infinite;
+
+  @keyframes cursor-blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  @keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+}
+
+/* 基础样式 */
+html, body {
+  height: 100%;
+}
+
+body {
+  @apply bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 antialiased;
+}
+
+/* 页面过渡动画 */
+.page-enter-active,
+.page-leave-active {
+  transition: all 0.3s ease-in-out;
+}
+.page-enter-from,
+.page-leave-to {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+/* Theme Toggle Transition */
+@keyframes diagonal-wipe-out {
+  from {
+    clip-path: inset(0 0 0 0);
+  }
+  to {
+    clip-path: inset(0 0 100% 100%);
+  }
+}
+
+@keyframes diagonal-wipe-in {
+  from {
+    clip-path: inset(100% 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+::view-transition-old(root) {
+  animation: 0.5s ease-in-out forwards diagonal-wipe-out;
+}
+
+::view-transition-new(root) {
+  animation: 0.5s ease-in-out forwards diagonal-wipe-in;
+}
